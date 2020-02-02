@@ -1,15 +1,29 @@
 Source: cgal
-Priority: optional
-Maintainer: Joachim Reichel <reichel@debian.org>
-# "ipe" is only needed because it contains goodies.lua which is needed by FindIPE.cmake
-Build-Depends: debhelper (>= 11), dpkg-awk, tar (>= 1.28), cmake, zlib1g-dev,
- libboost-dev, libboost-thread-dev, libboost-program-options-dev,
- libboost-system-dev, libeigen3-dev, libgmp10-dev, libmpfr-dev,
- libglu1-mesa-dev, qtbase5-dev [!armel !armhf],
- libqt5opengl5-dev [!armel !armhf], libqt5svg5-dev [!armel !armhf],
- libipe-dev, ipe
-Standards-Version: 4.4.1
 Section: libs
+Priority: optional
+Debian-Maintainer: Joachim Reichel <reichel@debian.org>
+Maintainer: Thomas Karl Pietrowski <thopiekar@gmail.com>
+# "ipe" is only needed because it contains goodies.lua which is needed by FindIPE.cmake
+Build-Depends:
+ debhelper (>= 11),
+ dpkg-awk,
+ tar (>= 1.28),
+ cmake,
+ zlib1g-dev,
+ libboost-dev,
+ libboost-thread-dev,
+ libboost-program-options-dev,
+ libboost-system-dev,
+ libeigen3-dev,
+ libgmp10-dev,
+ libmpfr-dev,
+ libglu1-mesa-dev,
+ qtbase5-dev [!armel !armhf],
+ libqt5opengl5-dev [!armel !armhf],
+ libqt5svg5-dev [!armel !armhf],
+ libipe-dev,
+ ipe,
+Standards-Version: 4.4.1
 Rules-Requires-Root: no
 Homepage: http://www.cgal.org/
 
@@ -17,9 +31,19 @@ Package: libcgal-dev
 Section: libdevel
 Architecture: any
 Multi-Arch: same
-Depends: libboost-dev, libboost-thread-dev, libboost-system-dev,
- libboost-program-options-dev, libgmp10-dev, libmpfr-dev, zlib1g-dev, ${misc:Depends}
-Suggests: libmpfi-dev, libntl-dev, libtbb-dev
+Depends:
+ libboost-dev,
+ libboost-thread-dev,
+ libboost-system-dev,
+ libboost-program-options-dev,
+ libgmp10-dev,
+ libmpfr-dev,
+ zlib1g-dev,
+ ${misc:Depends},
+Suggests:
+ libmpfi-dev,
+ libntl-dev,
+ libtbb-dev
 Description: C++ library for computational geometry (development files)
  CGAL (Computational Geometry Algorithms Library) makes the most important
  of the solutions and methods developed in computational geometry available
@@ -36,7 +60,8 @@ Section: libdevel
 # actually "Architecture: any [!armel !armhf]" via debhelper
 Architecture: any
 Multi-Arch: same
-Depends: libcgal-dev, ${misc:Depends}
+Depends: libcgal-dev,
+ ${misc:Depends}
 Description: C++ library for computational geometry (development files, support for Qt5)
  CGAL (Computational Geometry Algorithms Library) makes the most important
  of the solutions and methods developed in computational geometry available
@@ -49,15 +74,40 @@ Package: libcgal-demo
 Section: devel
 Architecture: all
 Multi-Arch: foreign
-Depends: libcgal-dev (>= ${binary:Version}), ${misc:Depends}
-Recommends: libcgal-qt5-dev (>= ${binary:Version})
-Suggests: cimg-dev, geomview, gfortran, lib3mf-dev, libatlas-base-dev,
- libboost-filesystem-dev, libboost-iostreams-dev, libboost-serialization-dev,
- libeigen3-dev, libglew-dev, libglpk-dev, libglpk-dev, libipe-dev,
- liblapack-dev, libmagick++-dev, libmetis-dev, libmpfi-dev, libntl-dev,
- libopencv-dev, libqt5opengl5-dev, libqt5sql5-sqlite, libqt5svg5-dev,
- libsuitesparse-dev, libtbb-dev, libvtk7-dev, qtscript5-dev, qttools5-dev,
- qttools5-dev-tools, vtk7
+Depends: libcgal-dev (>= ${binary:Version}),
+ ${misc:Depends}
+Recommends:
+ libcgal-qt5-dev (>= ${binary:Version}),
+Suggests:
+ cimg-dev,
+ geomview,
+ gfortran,
+ lib3mf-dev,
+ libatlas-base-dev,
+ libboost-filesystem-dev,
+ libboost-iostreams-dev,
+ libboost-serialization-dev,
+ libeigen3-dev,
+ libglew-dev,
+ libglpk-dev,
+ libglpk-dev,
+ libipe-dev,
+ liblapack-dev,
+ libmagick++-dev,
+ libmetis-dev,
+ libmpfi-dev,
+ libntl-dev,
+ libopencv-dev,
+ libqt5opengl5-dev,
+ libqt5sql5-sqlite,
+ libqt5svg5-dev,
+ libsuitesparse-dev,
+ libtbb-dev,
+ libvtk7-dev,
+ qtscript5-dev,
+ qttools5-dev,
+ qttools5-dev-tools,
+ vtk7,
 Description: C++ library for computational geometry (demos)
  CGAL (Computational Geometry Algorithms Library) makes the most important
  of the solutions and methods developed in computational geometry available
@@ -69,10 +119,16 @@ Description: C++ library for computational geometry (demos)
 Package: libcgal-ipelets
 Section: graphics
 Architecture: any
-Depends: ipe (>= ${Ipe-Version}), ipe (<< ${Ipe-Version}+),
- libcgal-dev (>= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
-Conflicts: libcgal5-ipelets
-Replaces: libcgal5-ipelets
+Depends:
+ ipe (>= ${Ipe-Version}),
+ ipe (<< ${Ipe-Version}+),
+ libcgal-dev (>= ${binary:Version}),
+ ${shlibs:Depends},
+ ${misc:Depends},
+Conflicts:
+ libcgal5-ipelets
+Replaces:
+ libcgal5-ipelets
 Description: C++ library for computational geometry (ipelets)
  CGAL (Computational Geometry Algorithms Library) makes the most important
  of the solutions and methods developed in computational geometry available
