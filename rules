@@ -27,14 +27,17 @@ endif
 override_dh_auto_clean:
 	dh_auto_clean $(DEBHELPER_QT5)
 	rm -fr build
-	$(MAKE) -C debian/tests clean
 
 override_dh_auto_configure-arch:
-	QTDIR= dh_auto_configure --builddirectory=build -- \
+	QTDIR= dh_auto_configure \
+	  --builddirectory=build -- \
 	  -DCMAKE_BUILD_TYPE=Release \
-	  -DWITH_demos=OFF -DWITH_examples=OFF \
+	  -DWITH_demos=OFF \
+	  -DWITH_examples=OFF \
 	  -DCGAL_INSTALL_CMAKE_DIR=lib/$(DEB_HOST_MULTIARCH)/cmake/CGAL $(CMAKE_QT5)
-	QTDIR= dh_auto_configure --builddirectory=build/demo/CGAL_ipelets --sourcedirectory=demo/CGAL_ipelets -- \
+	QTDIR= dh_auto_configure \
+	  --builddirectory=build/demo/CGAL_ipelets \
+	  --sourcedirectory=CGAL_ipelets/demo/CGAL_ipelets -- \
 	  -DCMAKE_BUILD_TYPE=Release \
 	  -DCGAL_DIR=$(CURDIR)/build
 
@@ -49,14 +52,7 @@ override_dh_auto_build-indep:
 	# empty
 
 override_dh_auto_test-arch:
-ifeq (,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
-	$(MAKE) -C debian/tests rounding_modes_simple
-	debian/tests/rounding_modes_simple
-	$(MAKE) -C debian/tests rounding_math_simple
-	debian/tests/rounding_math_simple
-	$(MAKE) -C debian/tests rounding_modes_cgal
-	debian/tests/rounding_modes_cgal
-endif
+	# empty
 
 override_dh_auto_test-indep:
 	# empty
@@ -69,15 +65,6 @@ override_dh_install-arch:
 	# remove -fdebug-prefix-map, -ffile-prefix-map, and -fmacro-prefix-map settings
   # from CGALConfig.cmake to avoid false positives in reproducible builds report
 	sed -i 's/-f\(debug\|file\|macro\)-prefix-map=[^ ]* //' debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/cmake/CGAL/CGALConfig.cmake
-
-	# tweak installed documentation files
-	mv debian/tmp/usr/share/doc/CGAL-`cat VERSION` debian/tmp/usr/share/doc/cgal
-	mv debian/tmp/usr/share/doc/cgal/CHANGES.md debian/tmp/usr/share/doc/cgal/changelog
-	rm debian/tmp/usr/share/doc/cgal/LICENSE*
-	rm debian/tmp/usr/share/doc/cgal/AUTHORS
-
-	# remove irrelevant binary
-	rm debian/tmp/usr/bin/cgal_make_macosx_app
 
 	dh_install --sourcedir=debian/tmp
 	dh_missing --list-missing
