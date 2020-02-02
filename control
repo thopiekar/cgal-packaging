@@ -1,0 +1,82 @@
+Source: cgal
+Priority: optional
+Maintainer: Joachim Reichel <reichel@debian.org>
+# "ipe" is only needed because it contains goodies.lua which is needed by FindIPE.cmake
+Build-Depends: debhelper (>= 11), dpkg-awk, tar (>= 1.28), cmake, zlib1g-dev,
+ libboost-dev, libboost-thread-dev, libboost-program-options-dev,
+ libboost-system-dev, libeigen3-dev, libgmp10-dev, libmpfr-dev,
+ libglu1-mesa-dev, qtbase5-dev [!armel !armhf],
+ libqt5opengl5-dev [!armel !armhf], libqt5svg5-dev [!armel !armhf],
+ libipe-dev, ipe
+Standards-Version: 4.4.1
+Section: libs
+Rules-Requires-Root: no
+Homepage: http://www.cgal.org/
+
+Package: libcgal-dev
+Section: libdevel
+Architecture: any
+Multi-Arch: same
+Depends: libboost-dev, libboost-thread-dev, libboost-system-dev,
+ libboost-program-options-dev, libgmp10-dev, libmpfr-dev, zlib1g-dev, ${misc:Depends}
+Suggests: libmpfi-dev, libntl-dev, libtbb-dev
+Description: C++ library for computational geometry (development files)
+ CGAL (Computational Geometry Algorithms Library) makes the most important
+ of the solutions and methods developed in computational geometry available
+ to users in industry and academia in a C++ library. The goal is to provide
+ easy access to useful, reliable geometric algorithms.
+ .
+ This package contains most of the header files. The header files for
+ visualization with Qt can be found in the package libcgal-qt5-dev.
+
+Package: libcgal-qt5-dev
+Conflicts: libcgal-qt4-dev
+Replaces: libcgal-qt4-dev
+Section: libdevel
+# actually "Architecture: any [!armel !armhf]" via debhelper
+Architecture: any
+Multi-Arch: same
+Depends: libcgal-dev, ${misc:Depends}
+Description: C++ library for computational geometry (development files, support for Qt5)
+ CGAL (Computational Geometry Algorithms Library) makes the most important
+ of the solutions and methods developed in computational geometry available
+ to users in industry and academia in a C++ library. The goal is to provide
+ easy access to useful, reliable geometric algorithms.
+ .
+ This package contains the header files for visualization with Qt.
+
+Package: libcgal-demo
+Section: devel
+Architecture: all
+Multi-Arch: foreign
+Depends: libcgal-dev (>= ${binary:Version}), ${misc:Depends}
+Recommends: libcgal-qt5-dev (>= ${binary:Version})
+Suggests: cimg-dev, geomview, gfortran, lib3mf-dev, libatlas-base-dev,
+ libboost-filesystem-dev, libboost-iostreams-dev, libboost-serialization-dev,
+ libeigen3-dev, libglew-dev, libglpk-dev, libglpk-dev, libipe-dev,
+ liblapack-dev, libmagick++-dev, libmetis-dev, libmpfi-dev, libntl-dev,
+ libopencv-dev, libqt5opengl5-dev, libqt5sql5-sqlite, libqt5svg5-dev,
+ libsuitesparse-dev, libtbb-dev, libvtk7-dev, qtscript5-dev, qttools5-dev,
+ qttools5-dev-tools, vtk7
+Description: C++ library for computational geometry (demos)
+ CGAL (Computational Geometry Algorithms Library) makes the most important
+ of the solutions and methods developed in computational geometry available
+ to users in industry and academia in a C++ library. The goal is to provide
+ easy access to useful, reliable geometric algorithms.
+ .
+ This package contains the demos and examples.
+
+Package: libcgal-ipelets
+Section: graphics
+Architecture: any
+Depends: ipe (>= ${Ipe-Version}), ipe (<< ${Ipe-Version}+),
+ libcgal-dev (>= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Conflicts: libcgal5-ipelets
+Replaces: libcgal5-ipelets
+Description: C++ library for computational geometry (ipelets)
+ CGAL (Computational Geometry Algorithms Library) makes the most important
+ of the solutions and methods developed in computational geometry available
+ to users in industry and academia in a C++ library. The goal is to provide
+ easy access to useful, reliable geometric algorithms.
+ .
+ This package contains the ipelets, i.e., plugins for ipe.

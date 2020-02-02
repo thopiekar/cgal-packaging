@@ -1,0 +1,21 @@
+Author: Joachim Reichel <reichel@debian.org>
+Description: Disable the FPU rounding mode check on mipsel and mips64el. 
+  This restores the state as in CGAL 4.x where the check was part of the
+  shared library and disabled due to -DNDEBUG.
+Index: cgal-5.0/include/CGAL/test_FPU_rounding_mode_impl.h
+===================================================================
+--- cgal-5.0.orig/include/CGAL/test_FPU_rounding_mode_impl.h
++++ cgal-5.0/include/CGAL/test_FPU_rounding_mode_impl.h
+@@ -30,10 +30,12 @@ struct Check_FPU_rounding_mode_is_restor
+ 
+   ~Check_FPU_rounding_mode_is_restored()
+   {
++#ifndef __mips__
+     CGAL_assertion_msg( FPU_get_cw() == mode,
+                         "The default FPU rounding mode has not been restored "
+                         " before the exit of the program. "
+                         "That may be a bug in some CGAL kernel code.");
++#endif
+   }
+ };
+ 

@@ -1,0 +1,2 @@
+improve-thirdparty-autodetection.patch
+disable-fpu-rounding-mode-check-for-mipsel-and-mips64el
