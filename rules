@@ -95,6 +95,8 @@ endif
 
 override_dh_install-indep:
 	mkdir -p debian/tmp/usr/share/doc/cgal
+	cp -rfv */demo debian/tmp/usr/share/doc/cgal
+	cp -rfv */examples debian/tmp/usr/share/doc/cgal
 
 	dh_install --sourcedir=debian/tmp
 	dh_missing --list-missing
