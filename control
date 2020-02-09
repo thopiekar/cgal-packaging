@@ -1,9 +1,8 @@
 Source: cgal
 Section: libs
 Priority: optional
-Debian-Maintainer: Joachim Reichel <reichel@debian.org>
 Maintainer: Thomas Karl Pietrowski <thopiekar@gmail.com>
-# "ipe" is only needed because it contains goodies.lua which is needed by FindIPE.cmake
+Debian-Maintainer: Joachim Reichel <reichel@debian.org>
 Build-Depends:
  debhelper (>= 11),
  dpkg-awk,
