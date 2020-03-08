@@ -1,4 +1,4 @@
-cgal (5.0.1-1) unstable; urgency=medium
+cgal (5.0.2-0) unstable; urgency=medium
 
   * Automized build with packaging files based on Debian buster
 
